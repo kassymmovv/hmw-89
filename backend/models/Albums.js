@@ -8,7 +8,8 @@ const ProductSchema = new Schema({
     required: true
   },
   date: {
-    type: String,
+    type: Date,
+    default: Date.now(),
     required: true
   },
   image: String,

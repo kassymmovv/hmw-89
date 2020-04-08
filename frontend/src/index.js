@@ -4,6 +4,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {ConnectedRouter, connectRouter, routerMiddleware} from "connected-react-router";
 import {createBrowserHistory} from "history";
 import thunkMiddleware from 'redux-thunk';
+import 'react-toastify/dist/ReactToastify.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Provider} from 'react-redux'

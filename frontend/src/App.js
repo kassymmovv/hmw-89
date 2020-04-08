@@ -12,10 +12,12 @@ import Albums from "./container/Albums/Albums";
 import NewAuthor from "./container/NewAuthor/NewAuthor";
 import NewAlbum from "./container/NewAlbum/NewAlbum";
 import NewTrack from "./container/NewTrack/NewTrack";
+import {ToastContainer} from "react-toastify";
 
 function App() {
   return (
     <div className="App">
+        <ToastContainer autoClose={3000} />
         <header>
             <Toolbar/>
         </header>

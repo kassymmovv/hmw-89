@@ -5,12 +5,13 @@ import {getAuthors} from "../../store/authorActions";
 import AlbumForm from "../AddAlbumForm/AddAlbumForm";
 import {postAlbum} from "../../store/albumAction";
 
-class NewProduct extends Component {
+class NewAlbum extends Component {
     componentDidMount() {
         this.props.getAuthors();
     }
 
     createProduct = async (productData) => {
+        console.log(productData);
         await this.props.postAlbum(productData);
         this.props.history.push('/');
     };
@@ -38,4 +39,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(NewAlbum);

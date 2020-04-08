@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Col, Form, FormGroup} from "reactstrap";
+import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import {registerUser} from "../../store/userActions";
 import {connect} from "react-redux";
 import FormElement from "../../component/FormElement/FormElement";
@@ -7,7 +7,9 @@ import FormElement from "../../component/FormElement/FormElement";
 class Register extends Component {
     state = {
         username: '',
-        password: ''
+        password: '',
+        displayName:'',
+        image:''
     };
 
     inputChangeHandler = event => {
@@ -18,9 +20,21 @@ class Register extends Component {
 
     submitFormHandler = event => {
         event.preventDefault();
-        this.props.registerUser({...this.state});
-    };
 
+        const formData = new FormData();
+
+        Object.keys(this.state).forEach(key => {
+            let value = this.state[key];
+
+            formData.append(key, value);
+        });
+        this.props.registerUser(formData);
+    };
+    fileChangeHandler = event => {
+        this.setState({
+            [event.target.name]: event.target.files[0]
+        })
+    };
     getFieldError = fieldName => {
         try {
             return this.props.error.errors[fieldName].message;
@@ -52,6 +66,22 @@ class Register extends Component {
                         error={this.getFieldError('password')}
                         placeholder="Enter password"
                         autoComplete="new-password"
+                    />
+                    <FormElement
+                        propertyName="displayName"
+                        title="Display Name"
+                        value={this.state.displayName}
+                        onChange={this.inputChangeHandler}
+                        error={this.getFieldError('displayName')}
+                        placeholder="Enter Display Name"
+                        autoComplete="new-displayName"
+                    />
+
+                    <FormElement
+                        type="file"
+                        propertyName="image"
+                        title="Avatar"
+                        onChange={this.fileChangeHandler}
                     />
                     <FormGroup row>
                         <Col sm={{offset: 2, size: 10}}>

@@ -21,12 +21,27 @@ const upload = multer({storage});
 router.get('/', async (req, res) => {
     const author = await Author.find({publish:true});
 
+    const token = req.get('Authorization').split(' ')[1];
+    const user = await User.findOne({token:token});
+    if (user.role === 'admin'){
+        const albumss = await Author.find({});
+
+        res.send(albumss);
+    }
         return res.send(author);
 
 
 
 });
+router.post('/publish/:id', async (req, res) => {
 
+    try {
+        const album = await Author.findByIdAndUpdate({_id:req.params.id},{publish:true})
+
+    } catch (e) {
+        return res.status(400).send(e);
+    }
+});
 router.post('/',[ upload.single('image')], async (req, res) => {
     const Data = req.body;
 

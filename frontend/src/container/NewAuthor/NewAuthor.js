@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {getAuthors, postAuthor} from "../../store/authorActions";
 import AuthorForm from "../AddAuthorForm/AddAuthorForm";
 
-class NewProduct extends Component {
+class NewAuthor extends Component {
 
 
     createProduct = async (productData) => {
@@ -29,4 +29,4 @@ const mapDispatchToProps = dispatch => ({
     postAuthor: productData => dispatch(postAuthor(productData)),
 });
 
-export default connect(null, mapDispatchToProps)(NewProduct);
+export default connect(null, mapDispatchToProps)(NewAuthor);

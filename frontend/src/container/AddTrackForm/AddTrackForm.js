@@ -17,11 +17,6 @@ class TrackForm extends Component {
 
         Object.keys(this.state).forEach(key => {
             let value = this.state[key];
-
-            if (key === 'description') {
-                value = JSON.stringify(value);
-            }
-
             formData.append(key, value);
         });
 
@@ -36,6 +31,7 @@ class TrackForm extends Component {
 
 
     render() {
+        console.log(this.state);
         return (
             <Form onSubmit={this.submitFormHandler}>
                 <FormGroup row>

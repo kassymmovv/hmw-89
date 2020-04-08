@@ -1,5 +1,6 @@
 import axiosApi from "../axiosApi";
 import {push} from 'connected-react-router';
+import { toast } from 'react-toastify';
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -33,7 +34,16 @@ export const registerUser = userData => {
         }
     }
 };
+export const loginWithFacebook = facebookData => {
+    return async dispatch => {
+        const response = await axiosApi.post('/users/facebook', facebookData);
 
+        console.log('here');
+        toast.success('Logged in with Facebook');
+        dispatch(loginUserSuccess(response.data));
+        dispatch(push('/'));
+    };
+};
 export const loginUser = userData => {
     return async dispatch => {
         try {

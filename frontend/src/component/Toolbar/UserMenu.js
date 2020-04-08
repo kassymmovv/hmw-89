@@ -5,7 +5,9 @@ const UserMenu = ({user}) => {
     return (
         <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav caret>
-                Hello, {user.username}!
+                <img src={user.avatar} alt="User" style={{borderRadius: "50%", width: "40px", height: "40px"}}/>
+
+                Hello, {user.displayName}!
             </DropdownToggle>
             <DropdownMenu right>
                 <DropdownItem>

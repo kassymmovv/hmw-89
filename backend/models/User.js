@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-
+const {nanoid} = require('nanoid');
 const SALT_WORK_FACTOR = 10;
 
 const UserSchema = mongoose.Schema({
@@ -21,6 +21,9 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    displayName:{
+        type: String,
+    },
     token:{
         type:String
     },
@@ -29,8 +32,15 @@ const UserSchema = mongoose.Schema({
         required: true,
         default: 'user',
         enum: ['user', 'admin']
-    }
+    },
+    avatar: String,
+    firstName: String,
+    lastName: String,
+    facebookId: String
 });
+UserSchema.methods.generateToken = function() {
+    this.token = nanoid();
+};
 
 UserSchema.pre('save', async function(next) {
     if(!this.isModified('password')) return next();
